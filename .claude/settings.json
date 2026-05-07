@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -)",
+      "Bash(npm run *)",
+      "Bash(find /tmp /var/folders -name \"*.pdf\" 2>/dev/null | head -20; ls /Users/sammartinez/.claude/projects/-Users-sammartinez-Code-moto-study-pkg/memory/ 2>/dev/null)",
+      "Read(//private/tmp/**)",
+      "Bash(find /Users/sammartinez -name \"*.pdf\" 2>/dev/null | head -20)",
+      "Read(//Users/sammartinez/**)",
+      "Bash(python3 -c \"import PyPDF2; print\\('available'\\)\")",
+      "Bash(python3 -c \"import pypdf; print\\('pypdf available'\\)\")",
+      "Bash(python3 -c \"import pdfminer; print\\('pdfminer available'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(mkdir -p /Users/sammartinez/Code/moto-study-pkg/data && cp /Users/sammartinez/Desktop/Motorcycle_manual.pdf /Users/sammartinez/Code/moto-study-pkg/data/Idaho_Motorcycle_Riders_Handbook_July2025.pdf && ls -lh /Users/sammartinez/Code/moto-study-pkg/data/)"
+    ],
+    "additionalDirectories": [
+      "/Users/sammartinez/Desktop"
+    ]
+  }
+}
