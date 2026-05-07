@@ -22,6 +22,27 @@
   --radius-sm: 6px;
 }
 
+/* ---- LIGHT THEME ---- */
+[data-theme="light"] {
+  --bg: #f4f4f2;
+  --bg2: #ffffff;
+  --bg3: #ebebea;
+  --bg4: #e0e0de;
+  --border: rgba(0,0,0,0.1);
+  --border2: rgba(0,0,0,0.18);
+  --text: #111113;
+  --text2: #55565c;
+  --text3: #9a9ba0;
+  --accent: #c87810;
+  --accent2: #d88820;
+  --blue: #1d6cc0;
+  --blue2: #2878d0;
+  --green: #247d52;
+  --green2: #2e9060;
+  --red: #be3838;
+  --red2: #cc4444;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -45,6 +66,12 @@ body {
   background-image:
     repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px),
     repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.03) 60px);
+  position: relative;
+}
+[data-theme="light"] .home {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(0,0,0,0.04) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(0,0,0,0.04) 60px);
 }
 
 .home-inner {
@@ -128,6 +155,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
 }
 
 .topbar {
@@ -152,8 +180,36 @@ body {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.15s;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  white-space: nowrap;
 }
 .back-btn:hover { border-color: var(--border2); color: var(--text); }
+
+.theme-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px 8px;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  line-height: 1;
+}
+.theme-btn:hover { border-color: var(--border2); color: var(--text); }
+
+.home-theme-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
 
 .topbar-title {
   font-family: 'Barlow Condensed', sans-serif;
@@ -161,6 +217,12 @@ body {
   font-weight: 700;
   letter-spacing: 0.03em;
   color: var(--text);
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .page-content {
@@ -588,3 +650,15 @@ body {
 .badge-fail { background: rgba(224,80,80,0.2); color: var(--red2); }
 .review-body { padding: 10px 14px; font-size: 13px; color: var(--text2); line-height: 1.55; }
 .review-body strong { color: var(--text); font-weight: 600; }
+
+/* ---- MOBILE ---- */
+@media (max-width: 420px) {
+  .home-cards { grid-template-columns: 1fr; }
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .back-btn { font-size: 12px; padding: 4px 10px; }
+  .page-content { padding: 1rem 0.875rem 3rem; }
+  .fact-label { min-width: 130px; }
+  .q-text { font-size: 15px; }
+  .test-start { padding: 2rem 0.5rem; }
+  .stats-bar { max-width: 100%; }
+}

@@ -21,7 +21,15 @@ function shuffleAnswers(q) {
   }
 }
 
-export default function PracticeTest({ onBack, total = 25, pass = 20 }) {
+function ThemeToggle({ theme, toggleTheme }) {
+  return (
+    <button className="theme-btn" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+      {theme === 'dark' ? '☀' : '🌙'}
+    </button>
+  )
+}
+
+export default function PracticeTest({ onBack, total = 25, pass = 20, theme, toggleTheme }) {
   const [phase, setPhase] = useState('start') // start | test | results
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
@@ -52,6 +60,7 @@ export default function PracticeTest({ onBack, total = 25, pass = 20 }) {
       <div className="topbar">
         <button className="back-btn" onClick={onBack}>← Back</button>
         <span className="topbar-title">{isExtended ? 'Extended Practice' : 'Practice Test'}</span>
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
       <div className="page-content">
         <div className="test-start">
@@ -79,6 +88,7 @@ export default function PracticeTest({ onBack, total = 25, pass = 20 }) {
         <div className="topbar">
           <button className="back-btn" onClick={() => setReviewMode(false)}>← Results</button>
           <span className="topbar-title">Review Answers</span>
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         </div>
         <div className="page-content">
           {questions.map((q, i) => {
@@ -106,6 +116,7 @@ export default function PracticeTest({ onBack, total = 25, pass = 20 }) {
         <div className="topbar">
           <button className="back-btn" onClick={onBack}>← Home</button>
           <span className="topbar-title">Results</span>
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
         </div>
         <div className="page-content">
           <div className="results">
@@ -146,6 +157,7 @@ export default function PracticeTest({ onBack, total = 25, pass = 20 }) {
       <div className="topbar">
         <button className="back-btn" onClick={onBack}>← Home</button>
         <span className="topbar-title">Practice Test</span>
+        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
       <div className="page-content">
         <div className="q-progress">

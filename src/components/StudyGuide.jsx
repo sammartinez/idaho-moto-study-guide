@@ -187,8 +187,10 @@ function LaneSection() {
           <text x="113" y="182" textAnchor="middle" fill="#5ba3f0" fontSize="11" fontFamily="Barlow, sans-serif">✓ Blind intersections</text>
           <text x="113" y="199" textAnchor="middle" fill="#5ba3f0" fontSize="11" fontFamily="Barlow, sans-serif">✓ Following a vehicle</text>
           <text x="113" y="216" textAnchor="middle" fill="#5ba3f0" fontSize="11" fontFamily="Barlow, sans-serif">✓ Before passing ahead</text>
-          <text x="113" y="260" textAnchor="middle" fill="rgba(91,163,240,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Seen in side mirror</text>
-          <text x="113" y="276" textAnchor="middle" fill="rgba(91,163,240,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">(less often checked)</text>
+          {/* P1 separator + footer */}
+          <line x1="22" y1="232" x2="206" y2="232" stroke="rgba(91,163,240,0.2)" strokeWidth="1" />
+          <text x="113" y="256" textAnchor="middle" fill="rgba(91,163,240,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Seen in side mirror</text>
+          <text x="113" y="272" textAnchor="middle" fill="rgba(91,163,240,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">(less often checked)</text>
 
           {/* Position 2 — Center */}
           <rect x="237" y="16" width="207" height="288" rx="8" fill="rgba(61,184,122,0.08)" stroke="rgba(61,184,122,0.25)" strokeWidth="1" />
@@ -203,8 +205,10 @@ function LaneSection() {
           <text x="340" y="165" textAnchor="middle" fill="#50cc8e" fontSize="11" fontFamily="Barlow, sans-serif">✓ Parked cars + oncoming</text>
           <text x="340" y="182" textAnchor="middle" fill="#50cc8e" fontSize="11" fontFamily="Barlow, sans-serif">✓ Being passed from behind</text>
           <text x="340" y="199" textAnchor="middle" fill="#50cc8e" fontSize="11" fontFamily="Barlow, sans-serif">✓ Avoid blind spots</text>
-          <text x="340" y="260" textAnchor="middle" fill="rgba(80,204,142,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Visible in rearview mirror</text>
-          <text x="340" y="276" textAnchor="middle" fill="rgba(80,204,142,0.5)" fontSize="10" fontFamily="Barlow, sans-serif">⚠ Watch for oil strip</text>
+          {/* P2 separator + footer */}
+          <line x1="249" y1="232" x2="433" y2="232" stroke="rgba(80,204,142,0.2)" strokeWidth="1" />
+          <text x="340" y="256" textAnchor="middle" fill="rgba(80,204,142,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Visible in rearview mirror</text>
+          <text x="340" y="272" textAnchor="middle" fill="rgba(80,204,142,0.5)" fontSize="10" fontFamily="Barlow, sans-serif">⚠ Watch for oil strip</text>
 
           {/* Position 3 — Right */}
           <rect x="464" y="16" width="207" height="288" rx="8" fill="rgba(232,160,32,0.08)" stroke="rgba(232,160,32,0.25)" strokeWidth="1" />
@@ -218,11 +222,14 @@ function LaneSection() {
           <text x="567" y="148" textAnchor="middle" fill="#f0b840" fontSize="11" fontFamily="Barlow, sans-serif">✓ Being passed (wind)</text>
           <text x="567" y="165" textAnchor="middle" fill="#f0b840" fontSize="11" fontFamily="Barlow, sans-serif">✓ Avoid extended mirrors</text>
           <text x="567" y="182" textAnchor="middle" fill="#f0b840" fontSize="11" fontFamily="Barlow, sans-serif">✓ Avoid thrown objects</text>
-          <text x="567" y="260" textAnchor="middle" fill="rgba(240,184,64,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Use when being passed</text>
-          <text x="567" y="276" textAnchor="middle" fill="rgba(240,184,64,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">by oncoming vehicles</text>
+          <text x="567" y="199" textAnchor="middle" fill="#f0b840" fontSize="11" fontFamily="Barlow, sans-serif">✓ Oncoming vehicle passes</text>
+          {/* P3 separator + footer */}
+          <line x1="476" y1="232" x2="660" y2="232" stroke="rgba(232,160,32,0.2)" strokeWidth="1" />
+          <text x="567" y="256" textAnchor="middle" fill="rgba(240,184,64,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">Move right when passed</text>
+          <text x="567" y="272" textAnchor="middle" fill="rgba(240,184,64,0.6)" fontSize="10" fontFamily="Barlow, sans-serif">to avoid wind &amp; mirrors</text>
 
           {/* Direction arrow */}
-          <text x="340" y="306" textAnchor="middle" fill="#444" fontSize="11" fontFamily="Barlow, sans-serif">← Direction of travel →</text>
+          <text x="340" y="315" textAnchor="middle" fill="#444" fontSize="12" fontFamily="Barlow, sans-serif">← Direction of travel →</text>
         </svg>
       </div>
 
@@ -493,7 +500,7 @@ const SECTION_MAP = {
   flash: <FlashSection />,
 }
 
-export default function StudyGuide({ onBack }) {
+export default function StudyGuide({ onBack, theme, toggleTheme }) {
   const [activeTab, setActiveTab] = useState('fees')
 
   return (
@@ -501,12 +508,15 @@ export default function StudyGuide({ onBack }) {
       <div className="topbar">
         <button className="back-btn" onClick={onBack}>← Back</button>
         <span className="topbar-title">Study Guide</span>
+        <button className="theme-btn" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀' : '🌙'}
+        </button>
         <a
-          href="/Idaho_Motorcycle_Riders_Handbook_July2025.pdf"
+          href="https://itd.idaho.gov/wp-content/uploads/2025/10/Motorcycle_manual.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="back-btn"
-          style={{ marginLeft: 'auto', textDecoration: 'none' }}
+          style={{ textDecoration: 'none' }}
         >
           Open Handbook ↗
         </a>

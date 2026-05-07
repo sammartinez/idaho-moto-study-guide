@@ -1,23 +1,40 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import StudyGuide from './components/StudyGuide'
 import PracticeTest from './components/PracticeTest'
 import './index.css'
 
 export default function App() {
   const [view, setView] = useState('home')
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(t => {
+      const next = t === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('theme', next)
+      return next
+    })
+  }
+
   return (
     <div className="app">
-      {view === 'home' && <Home setView={setView} />}
-      {view === 'study' && <StudyGuide onBack={() => setView('home')} />}
-      {view === 'test' && <PracticeTest onBack={() => setView('home')} total={25} pass={20} />}
-      {view === 'test2' && <PracticeTest onBack={() => setView('home')} total={50} pass={40} />}
+      {view === 'home' && <Home setView={setView} theme={theme} toggleTheme={toggleTheme} />}
+      {view === 'study' && <StudyGuide onBack={() => setView('home')} theme={theme} toggleTheme={toggleTheme} />}
+      {view === 'test' && <PracticeTest onBack={() => setView('home')} total={25} pass={20} theme={theme} toggleTheme={toggleTheme} />}
+      {view === 'test2' && <PracticeTest onBack={() => setView('home')} total={50} pass={40} theme={theme} toggleTheme={toggleTheme} />}
     </div>
   )
 }
 
-function Home({ setView }) {
+function Home({ setView, theme, toggleTheme }) {
   return (
     <div className="home">
+      <button className="theme-btn home-theme-btn" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+        {theme === 'dark' ? '☀' : '🌙'}
+      </button>
       <div className="home-inner">
         <div className="home-badge">IDAHO DMV · 2025</div>
         <h1 className="home-title">Motorcycle<br />Rider Exam</h1>
